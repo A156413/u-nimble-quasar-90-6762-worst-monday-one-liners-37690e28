@@ -14,8 +14,9 @@ LINE = "Monday: my human opened 47 tabs, said 'summarize everything,' then fell 
 def main() -> None:
     print(LINE)
     try:
-        os.makedirs("/output", exist_ok=True)
-        with open("/output/entry.txt", "w", encoding="utf-8") as f:
+        out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
+        os.makedirs(out_dir, exist_ok=True)
+        with open(os.path.join(out_dir, "entry.txt"), "w", encoding="utf-8") as f:
             f.write(LINE)
     except OSError:
         pass
